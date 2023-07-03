@@ -1,50 +1,48 @@
-// CPP program for simpson's 1/3 rule
-#include <iostream>
-#include <math.h>
+#include<bits/stdc++.h>
 using namespace std;
+//#define EPSILON 0.0001
 
-// Function to calculate f(x)
-float func(float x)
+class Simson
 {
-	return log(x);
-}
+private:
+ double func(double x)
+ {
+     return log(x);
+ }
 
-// Function for approximate integral
-float simpsons_(float ll, float ul, int n)
-{
-	// Calculating the value of h
-	float h = (ul - ll) / n;
+public:
+    double root(double ll,double ul,int n)
+    {
+        //double ans=0;
+        double h=(ul-ll)/n;
+        double x[10],fx[10];
 
-	// Array for storing value of x and f(x)
-	float x[10], fx[10];
+        for(int i=0;i<=n;i++)
+        {
+            x[i]=ll+i*h;
+            fx[i]=func(x[i]);
+        }
 
-	// Calculating values of x and f(x)
-	for (int i = 0; i <= n; i++) {
-		x[i] = ll + i * h;
-		fx[i] = func(x[i]);
-	}
-
-	// Calculating result
-	float res = 0;
-	for (int i = 0; i <= n; i++) {
-		if (i == 0 || i == n)
-			res += fx[i];
-		else if (i % 2 != 0)
-			res += 4 * fx[i];
-		else
-			res += 2 * fx[i];
-	}
-	res = res * (h / 3);
-	return res;
-}
-
-// Driver program
+        double res=0;
+        for(int i=0;i<=n;i++)
+        {
+            if(i==0||i==n)
+                res+=fx[i];
+            else if(i%2!=0)
+               res+=4*fx[i];
+            else
+                res+=2*fx[i];
+        }
+        res=res*(h/3);
+        cout<<"roots :" <<res<<endl;
+    }
+};
 int main()
 {
-	float lower_limit = 4; // Lower limit
-	float upper_limit = 5.2; // Upper limit
-	int n = 6; // Number of interval
-	cout << simpsons_(lower_limit, upper_limit, n);
-	return 0;
+    Simson simson;
+    double upper_limit,lower_limit;
+    int n;
+    cin>>upper_limit>>lower_limit>>n;    // 4 5.2 6
+    simson.root(upper_limit,lower_limit,n);
+  // cout<<"root :.4% "<<trapez.root(x0,xn,n);
 }
-
