@@ -15,10 +15,12 @@ float func(float x, float y)
 void euler(float x0, float y, float h, float x)
 {
 	float temp = 0;
-
+    int n=(x-x0)/h;
 	// Iterating till the point at which we
 	// need approximation
-	while (x0 < x) {
+	//while (x0 < x)
+	for(int i=0;i<n;i++)
+	{
 		temp = y;
 		y = y + h * func(x0, y);
 		x0 = x0 + h;

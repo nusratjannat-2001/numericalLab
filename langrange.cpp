@@ -1,47 +1,49 @@
-// C++ program for implementation of Lagrange's Interpolation
-#include<bits/stdc++.h>
+
+/* CPP Program to find approximation
+of a ordinary differential equation
+using euler method.*/
+#include <bits/stdc++.h>
 using namespace std;
 
-// To represent a data point corresponding to x and y = f(x)
-struct Data
-{
-	int x, y;
-};
+class  Langrange
+    {
+  public:
+    void root(float value,float x[],float y[],int n)
+    {
+        float result=0;
+        for(int i=0;i<n;i++)
+        {
+            float term=y[i];
+            for(int j=0;j<n;j++)
+            {
+                if(j!=i)
+                term*=(value-x[j])/float(x[i]-x[j]);
+            }
+            result+=term;
+        }
+        cout<<"result :"<<result<<endl;
+    }
+    };
 
-// function to interpolate the given data points using Lagrange's formula
-// xi corresponds to the new data point whose value is to be obtained
-// n represents the number of known data points
-double interpolate(Data f[], int xi, int n)
-{
-	double result = 0; // Initialize result
 
-	for (int i=0; i<n; i++)
-	{
-		// Compute individual terms of above formula
-		double term = f[i].y;
-		for (int j=0;j<n;j++)
-		{
-			if (j!=i)
-				term = term*(xi - f[j].x)/double(f[i].x - f[j].x);
-		}
-
-		// Add current term to result
-		result += term;
-	}
-
-	return result;
-}
-
-// driver function to check the program
+// Driver program
 int main()
 {
-	// creating an array of 4 known data points
-	Data f[] = {{0,2}, {1,3}, {2,12}, {5,147}};
-
-	// Using the interpolate function to obtain a data point
-	// corresponding to x=3
-	cout << "Value of f(3) is : " << interpolate(f, 3, 4);
-
+   Langrange langrange;
+   int n;
+   cin>>n;   //4
+   float value;
+   cin>>value;        //4
+   float x[10],y[10];
+   for(int i=0;i<n;i++)
+   {
+       cin>>x[i];            //{{0,2}, {1,3}, {2,12}, {5,147}}
+   }
+   for(int i=0;i<n;i++)
+   {
+       cin>>y[i];
+   }
+   langrange.root(value,x,y,n);
 	return 0;
 }
 
