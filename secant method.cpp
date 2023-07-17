@@ -1,58 +1,53 @@
-
-// C++ Program to find root of an
-// equations using secant method
 #include <bits/stdc++.h>
 using namespace std;
-// function takes value of x and returns f(x)
+#define Epsilon 0.00001
 class Secant
 {
 private:
-float f(float x)
+ double f(double x)
+ {
+      return pow(x, 3) + 2*x*x - 1;
+
+ }
+
+ public:
+ void root(double x1,double x2,double E)
+ {
+     float xm,x0,c;
+     if(f(x1)*f(x2)<0)
 {
-    // we are taking equation as x^3+x-1
-    float f = pow(x, 3) + x - 1;
-    return f;
+         do
+     {
+         x0=(x1*f(x2)-x2*f(x1))/(f(x2)-f(x1));
+         c=f(x1)*f(x0);
+         x1=x2;
+         x2=x0;
+
+         if(c==0)
+            break;
+         xm=(x1*f(x2)-x2*f(x1))/(f(x2)-f(x1));
+     }
+     while((xm-x0)>=E);
+
+        cout<<x0;
+        exit(0);
 }
-public:
-void root(float x1, float x2, float E)
-{
-    float n = 0, xm, x0, c;
-    if (f(x1) * f(x2) < 0) {
-        do {
-            // calculate the intermediate value
-            x0 = (x1 * f(x2) - x2 * f(x1)) / (f(x2) - f(x1));
-
-            // check if x0 is root of equation or not
-            c = f(x1) * f(x0);
-
-            // update the value of interval
-            x1 = x2;
-            x2 = x0;
-
-            // update number of iteration
-            n++;
-
-            // if x0 is the root of equation then break the loop
-            if (c == 0)
-                break;
-            xm = (x1 * f(x2) - x2 * f(x1)) / (f(x2) - f(x1));
-        } while (abs(xm - x0) >= E); // repeat the loop
-                                // until the convergence
-
-        cout << "Root of the given equation=" << x0 << endl;
-        cout << "No. of iterations = " << n << endl;
-    } else
-        cout << "Can not find a root in the given interval";
-}
+     else
+        cout<<"NO";
+ }
 };
 
-// Driver code
-int main()
-{
-	// initializing the values
-	   Secant secant;
-    float x1,x2,E=.0001;
-    cin>>x1>>x2;
-	secant.root(x1, x2, E);
-	return 0;
+int main() {
+
+Secant secant;
+   for(int i=0;i<1000;i++)
+   {
+
+      double x1,x2,E=0.001;
+      x1=-9+rand()%10;
+      x2=rand()%10;
+       secant.root(x1,x2,E);
+   }
+
+    return 0;
 }

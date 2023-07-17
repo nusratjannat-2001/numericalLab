@@ -23,12 +23,18 @@ public:
            x=x-h;
        }
         cout<<"the root is : "<<x<<endl;
+        exit(0);
     }
 };
 int main()
 {
    Nrapson nrapson;
-    double x0;
-    cin>>x0;
+   for(int i=0;i<1000;i++)
+ {
+        double x0;
+   x0=-9+rand()%10;
     nrapson.root(x0);
+ }
+   // cin>>x0;
+
 }

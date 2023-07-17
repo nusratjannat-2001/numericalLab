@@ -2,7 +2,7 @@
 // solving equations
 #include<bits/stdc++.h>
 using namespace std;
-#define EPSILON 0.01
+#define EPSILON 0.00001
 
 // An example function whose solution is determined using
 // Bisection Method. The function is x^3 - x^2 + 2
@@ -25,7 +25,7 @@ void root(double a, double b)
 		return;
 	}
 
-	double c;
+	double c=a;
 	while ((b-a) >= EPSILON)
 	{
 		// Find middle point
@@ -42,6 +42,7 @@ void root(double a, double b)
 			a = c;
 	}
 	cout << "The value of root is : " << c;
+	exit(0);
 }
 };
 
@@ -50,7 +51,12 @@ int main()
 {
 	// Initial values assumed
 	Bisection bisection;
-	double a =-200, b = 300;
-	bisection.root(a, b);
+	 for(int i = 0; i < 1000; i++){
+            double a,b;
+      a = -9 + rand()%10;
+            b = rand()%10;
+      bisection.root(a, b);
+    }
+
 	return 0;
 }
